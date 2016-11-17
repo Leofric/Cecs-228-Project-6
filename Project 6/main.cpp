@@ -7,24 +7,43 @@
 //
 
 #include <iostream>
+#include <map>
+#include <iomanip>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-
+    std::map <int,int> values;
+    srand((unsigned)time(0));
+    int rng;
+    int sum;
+    for(int i = 0; i<10000; i++){
+        rng = (rand()%100 + 1);
+        sum += rng;
+        if(values.find(rng) == values.end()){
+            values[rng] = 1;
+        }
+        else {
+            values[rng]++;
+        }
+    }
     
-    //randomly generate 10,000 integers between 1-100
-    //store them in a container.
-    //print all 10,000 to the console on one screen, sorted, smallest first largest last,
-    //print the sum of all characters
-    //pause console, ask for user input to continue
-    //print average of all int values
-    //print 1 - 100 and the frequency of that number next to it.
-    
-    
-    //efficient
-    //sorted smallest to largest
-    //duplicate elements
-    
-    //simple array? sort via quicksort
-    
+    //print all 10,000
+    for(int i = 1, newLine = 0; i<101; i++){
+        for(int j = 0; j<values[i]; j++){
+            std::cout<<std::setw(3)<<std::left<<i<<" ";
+            newLine++;
+            if(newLine == 100){
+                newLine = 0;
+                std::cout<<std::endl;
+            }
+        }
+    }
+    std::cout<<std::endl;
+    std::cout<<"Sum of all numbers = "<<sum<<std::endl;
+    std::cout<<"--Press the enter key to continue--"<<std::endl;
+    std::cin.get();
+    std::cout<<"Average = "<<sum/10000<<std::endl;
+    std::cout<<"Printing frequency of all numbers.."<<std::endl;
+    for(int i = 1; i<101; i++){
+        std::cout<<i<<" : "<<values[i]<<std::endl;
+    }
 }
